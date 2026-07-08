@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추천글 수정 | 교내 독서 프로그램</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body>
+    <main class="page">
+        <section class="card wide-card">
+            <h1>추천글 수정</h1>
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {% include 'recommendations/form_fields.html' %}
+                <button type="submit" class="primary-button">수정</button>
+            </form>
+
+            <p class="link-text">
+                <a href="{% url 'recommendation_detail' recommendation.id %}">상세 페이지로 이동</a>
+            </p>
+        </section>
+    </main>
+</body>
+</html>

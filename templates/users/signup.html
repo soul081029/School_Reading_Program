@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 | 교내 독서 프로그램</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body>
+    <main class="page">
+        <section class="card">
+            <h1>회원가입</h1>
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="error-box">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="{{ form.student_id.id_for_label }}">학번</label>
+                    {{ form.student_id }}
+                    {% for error in form.student_id.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">비밀번호</label>
+                    {{ form.password }}
+                    {% for error in form.password.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password_confirm.id_for_label }}">비밀번호 확인</label>
+                    {{ form.password_confirm }}
+                    {% for error in form.password_confirm.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="primary-button">회원가입</button>
+            </form>
+
+            <p class="link-text">
+                이미 계정이 있나요?
+                <a href="{% url 'login' %}">로그인 페이지로 이동</a>
+            </p>
+        </section>
+    </main>
+</body>
+</html>

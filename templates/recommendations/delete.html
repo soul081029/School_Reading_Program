@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추천글 삭제 | 교내 독서 프로그램</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body>
+    <main class="page">
+        <section class="card">
+            <h1>추천글 삭제</h1>
+            <p class="student-info">"{{ recommendation.book_title }}" 추천글을 삭제하시겠습니까?</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="danger-button full-button">삭제</button>
+            </form>
+
+            <p class="link-text">
+                <a href="{% url 'recommendation_detail' recommendation.id %}">상세 페이지로 돌아가기</a>
+            </p>
+        </section>
+    </main>
+</body>
+</html>

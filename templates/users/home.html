@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 | 교내 독서 프로그램</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body>
+    <main class="page list-page">
+        <section class="content-wrap">
+            <div class="home-top-card">
+                <h1>교내 독서 프로그램</h1>
+                <p class="student-info">현재 로그인한 학번: <strong>{{ request.user.student_id }}</strong></p>
+
+                <form action="{% url 'logout' %}" method="post" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit" class="text-button">로그아웃</button>
+                </form>
+            </div>
+
+            <div class="main-section">
+                <div class="section-header">
+                    <h2>추천글 검색</h2>
+                    <a class="primary-button link-button compact-button" href="{% url 'create_recommendation' %}">추천글 작성</a>
+                </div>
+
+                <form class="search-form" action="{% url 'home' %}" method="get">
+                    <input
+                        type="search"
+                        name="q"
+                        value="{{ search_query }}"
+                        placeholder="책 제목, 저자, 추천 이유 검색"
+                    >
+                    <button type="submit" class="secondary-button compact-button">검색</button>
+                </form>
+            </div>
+
+            <div class="main-section">
+                <div class="section-header">
+                    <h2>추천글 목록</h2>
+                </div>
+
+                <div class="recommendation-grid">
+                    {% for recommendation in recommendations %}
+                        <a class="recommendation-card" href="{% url 'recommendation_detail' recommendation.id %}">
+                            <p class="meta-text">작성자: {{ recommendation.writer_name }}</p>
+                            <h2>{{ recommendation.book_title }}</h2>
+                            <p class="author-text">저자: {{ recommendation.book_author }}</p>
+                            <p class="preview-text">{{ recommendation.post_text|truncatechars:100 }}</p>
+                            <div class="card-footer">
+                                <p class="meta-text">작성일: {{ recommendation.created_at|date:"Y.m.d H:i" }}</p>
+                                <span class="primary-button link-button compact-button detail-button">자세히 보기</span>
+                            </div>
+                        </a>
+                    {% empty %}
+                        <div class="empty-box">
+                            <p>표시할 추천글이 없습니다.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="main-section">
+                <div class="section-header">
+                    <h2>책 한 줄 목록</h2>
+                </div>
+
+                <div class="empty-box">
+                    <p>준비 중입니다.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

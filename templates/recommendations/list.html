@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추천글 목록 | 교내 독서 프로그램</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body>
+    <main class="page list-page">
+        <section class="content-wrap">
+            <div class="page-header">
+                <div>
+                    <h1>추천글 목록</h1>
+                    <p class="sub-text">학생들이 함께 나누는 책 추천입니다.</p>
+                </div>
+                <div class="header-actions">
+                    <a class="secondary-button link-button compact-button" href="{% url 'home' %}">메인</a>
+                    {% if request.user.is_authenticated %}
+                        <a class="primary-button link-button compact-button" href="{% url 'create_recommendation' %}">작성</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="recommendation-grid">
+                {% for recommendation in recommendations %}
+                    <a class="recommendation-card" href="{% url 'recommendation_detail' recommendation.id %}">
+                        <p class="meta-text">{{ recommendation.writer_name }} · {{ recommendation.created_at|date:"Y.m.d H:i" }}</p>
+                        <h2>{{ recommendation.book_title }}</h2>
+                        <p class="author-text">저자: {{ recommendation.book_author }}</p>
+                        <p class="preview-text">{{ recommendation.post_text|truncatechars:100 }}</p>
+                    </a>
+                {% empty %}
+                    <div class="empty-box">
+                        <p>아직 작성된 추천글이 없습니다.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

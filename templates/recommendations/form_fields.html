@@ -1,0 +1,36 @@
+{% if form.non_field_errors %}
+    <div class="error-box">
+        {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="checkbox-group">
+    {{ form.is_anonymous }}
+    <label for="{{ form.is_anonymous.id_for_label }}">{{ form.is_anonymous.label }}</label>
+</div>
+
+<div class="form-group">
+    <label for="{{ form.book_title.id_for_label }}">책 제목</label>
+    {{ form.book_title }}
+    {% for error in form.book_title.errors %}
+        <p class="error-message">{{ error }}</p>
+    {% endfor %}
+</div>
+
+<div class="form-group">
+    <label for="{{ form.book_author.id_for_label }}">저자</label>
+    {{ form.book_author }}
+    {% for error in form.book_author.errors %}
+        <p class="error-message">{{ error }}</p>
+    {% endfor %}
+</div>
+
+<div class="form-group">
+    <label for="{{ form.post_text.id_for_label }}">추천 이유</label>
+    {{ form.post_text }}
+    {% for error in form.post_text.errors %}
+        <p class="error-message">{{ error }}</p>
+    {% endfor %}
+</div>
