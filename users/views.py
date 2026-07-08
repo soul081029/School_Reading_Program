@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.shortcuts import redirect, render
 
 from brief_reviews.models import BookQuote
-from recommendations.models import Recommendation
+from recommendations.models import Comment, Recommendation
 
 from .forms import LoginForm, SignupForm
 
@@ -30,6 +30,37 @@ def home(request):
             'recommendations': recommendations,
             'quotes': quotes,
             'search_query': search_query,
+        },
+    )
+
+
+@login_required
+def mypage_view(request):
+    """로그인한 사용자의 마이페이지를 보여줍니다."""
+    user = request.user
+    
+    # 내가 작성한 추천글
+    my_recommendations = Recommendation.objects.filter(author=user).order_by('-created_at')
+    
+    # 내가 작성한 댓글
+    my_comments = Comment.objects.filter(
+        author=user
+    ).select_related('recommendation').order_by('-created_at')
+    
+    # 내가 작성한 책 한 줄
+    my_quotes = BookQuote.objects.filter(author=user).order_by('-created_at')
+    
+    # 좋아요한 추천글
+    liked_recommendations = user.liked_recommendations.all().order_by('-created_at')
+    
+    return render(
+        request,
+        'users/mypage.html',
+        {
+            'my_recommendations': my_recommendations,
+            'my_comments': my_comments,
+            'my_quotes': my_quotes,
+            'liked_recommendations': liked_recommendations,
         },
     )
 

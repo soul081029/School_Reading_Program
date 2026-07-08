@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 | 교내 독서 프로그램</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body>
+    <main class="page list-page">
+        <section class="content-wrap">
+            <div class="mypage-header">
+                <h1>마이페이지</h1>
+                <div class="mypage-info">
+                    <p class="student-info">학번: <strong>{{ request.user.student_id }}</strong></p>
+                    <p class="student-info">가입일: <strong>{{ request.user.date_joined|date:"Y.m.d" }}</strong></p>
+                </div>
+                <a class="primary-button link-button compact-button" href="{% url 'home' %}">메인으로</a>
+            </div>
+
+            <!-- 내가 작성한 추천글 -->
+            <div class="main-section">
+                <div class="section-header">
+                    <h2>내가 작성한 추천글</h2>
+                </div>
+                <div class="activity-grid">
+                    {% for recommendation in my_recommendations %}
+                        <div class="activity-card">
+                            <a href="{% url 'recommendation_detail' recommendation.id %}" class="activity-link">
+                                <h3>{{ recommendation.book_title }}</h3>
+                                <p class="meta-text">작성일: {{ recommendation.created_at|date:"Y.m.d H:i" }}</p>
+                                <span class="detail-link">상세보기 →</span>
+                            </a>
+                        </div>
+                    {% empty %}
+                        <div class="empty-box">
+                            <p>작성한 추천글이 없습니다.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- 내가 작성한 댓글 -->
+            <div class="main-section">
+                <div class="section-header">
+                    <h2>내가 작성한 댓글</h2>
+                </div>
+                <div class="comment-activity-list">
+                    {% for comment in my_comments %}
+                        <div class="comment-activity-card">
+                            <p class="comment-activity-text">{{ comment.comment }}</p>
+                            <a href="{% url 'recommendation_detail' comment.recommendation.id %}" class="comment-activity-meta">
+                                📝 {{ comment.recommendation.book_title }}
+                            </a>
+                            <p class="meta-text">{{ comment.created_at|date:"Y.m.d H:i" }}</p>
+                        </div>
+                    {% empty %}
+                        <div class="empty-box">
+                            <p>작성한 댓글이 없습니다.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- 내가 작성한 책 한 줄 -->
+            <div class="main-section">
+                <div class="section-header">
+                    <h2>내가 작성한 책 한 줄</h2>
+                </div>
+                <div class="quote-activity-list">
+                    {% for quote in my_quotes %}
+                        <div class="quote-activity-card">
+                            <h3>{{ quote.book_title }}</h3>
+                            <p class="quote-activity-text">{{ quote.post_text }}</p>
+                            <p class="meta-text">{{ quote.created_at|date:"Y.m.d H:i" }}</p>
+                        </div>
+                    {% empty %}
+                        <div class="empty-box">
+                            <p>작성한 책 한 줄이 없습니다.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- 좋아요한 추천글 -->
+            <div class="main-section">
+                <div class="section-header">
+                    <h2>좋아요한 추천글</h2>
+                </div>
+                <div class="activity-grid">
+                    {% for recommendation in liked_recommendations %}
+                        <div class="activity-card liked-card">
+                            <a href="{% url 'recommendation_detail' recommendation.id %}" class="activity-link">
+                                <h3>{{ recommendation.book_title }}</h3>
+                                <p class="author-text">작성자: {{ recommendation.writer_name }}</p>
+                                <p class="meta-text">❤ {{ recommendation.like_count }}명</p>
+                                <span class="detail-link">상세보기 →</span>
+                            </a>
+                        </div>
+                    {% empty %}
+                        <div class="empty-box">
+                            <p>좋아요한 추천글이 없습니다.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

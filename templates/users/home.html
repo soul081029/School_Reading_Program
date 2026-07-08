@@ -14,10 +14,13 @@
                 <h1>교내 독서 프로그램</h1>
                 <p class="student-info">현재 로그인한 학번: <strong>{{ request.user.student_id }}</strong></p>
 
-                <form action="{% url 'logout' %}" method="post" class="logout-form">
-                    {% csrf_token %}
-                    <button type="submit" class="text-button">로그아웃</button>
-                </form>
+                <div class="home-top-actions">
+                    <a class="primary-button link-button" href="{% url 'mypage' %}">마이페이지</a>
+                    <form action="{% url 'logout' %}" method="post" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="text-button">로그아웃</button>
+                    </form>
+                </div>
             </div>
 
             <div class="main-section">

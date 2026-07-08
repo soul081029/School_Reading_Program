@@ -535,6 +535,220 @@ textarea:focus {
     }
 }
 
+/* MyPage Styles */
+.home-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.home-top-actions .primary-button {
+    flex: 1;
+    width: auto;
+    margin: 0;
+}
+
+.home-top-actions .logout-form {
+    flex: 1;
+    margin: 0;
+}
+
+.mypage-header {
+    margin-bottom: 28px;
+    padding: 28px 32px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(30, 55, 90, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.mypage-header h1 {
+    margin: 0;
+    text-align: left;
+    flex-shrink: 0;
+}
+
+.mypage-info {
+    flex: 1;
+}
+
+.mypage-info .student-info {
+    margin: 0 0 6px;
+    font-size: 16px;
+}
+
+.mypage-header .primary-button {
+    flex-shrink: 0;
+    width: auto;
+    min-width: 120px;
+}
+
+.activity-grid {
+    display: grid;
+    gap: 14px;
+}
+
+.activity-card {
+    padding: 22px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(30, 55, 90, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.activity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(30, 55, 90, 0.14);
+}
+
+.activity-card.liked-card {
+    border-left: 4px solid #ec4899;
+}
+
+.activity-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.activity-card h3 {
+    margin: 0 0 12px;
+    color: #163b73;
+    font-size: 20px;
+}
+
+.activity-card .meta-text {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.activity-card .author-text {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.detail-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.activity-card:hover .detail-link {
+    color: #1d4ed8;
+}
+
+.comment-activity-list {
+    display: grid;
+    gap: 14px;
+}
+
+.comment-activity-card {
+    padding: 18px;
+    background: #fff;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+    box-shadow: 0 8px 24px rgba(30, 55, 90, 0.1);
+}
+
+.comment-activity-text {
+    margin: 0 0 12px;
+    color: #26384f;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.comment-activity-meta {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #1d4ed8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.comment-activity-meta:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+.comment-activity-card .meta-text {
+    margin: 0;
+    font-size: 13px;
+}
+
+.quote-activity-list {
+    display: grid;
+    gap: 14px;
+}
+
+.quote-activity-card {
+    padding: 18px;
+    background: #fff;
+    border-radius: 8px;
+    border-left: 4px solid #10b981;
+    box-shadow: 0 8px 24px rgba(30, 55, 90, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quote-activity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(30, 55, 90, 0.14);
+}
+
+.quote-activity-card h3 {
+    margin: 0 0 10px;
+    color: #163b73;
+    font-size: 18px;
+}
+
+.quote-activity-text {
+    margin: 0 0 12px;
+    color: #26384f;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.quote-activity-card .meta-text {
+    margin: 0;
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .mypage-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mypage-header h1 {
+        width: 100%;
+    }
+
+    .mypage-info {
+        width: 100%;
+    }
+
+    .mypage-header .primary-button {
+        width: 100%;
+    }
+
+    .home-top-actions {
+        flex-direction: column;
+    }
+
+    .home-top-actions .primary-button,
+    .home-top-actions .logout-form {
+        width: 100%;
+    }
+}
+
 /* Quote Card Styles */
 .quote-card {
     padding: 22px;
