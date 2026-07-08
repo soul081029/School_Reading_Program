@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>책 한 줄 삭제 | 교내 독서 프로그램</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body>
+    <main class="page">
+        <section class="card wide-card">
+            <h1>책 한 줄 삭제</h1>
+
+            <div class="quote-preview">
+                <h2>{{ quote.book_title }}</h2>
+                <p class="quote-text">{{ quote.post_text|linebreaks }}</p>
+                <p class="meta-text">작성일: {{ quote.created_at|date:"Y.m.d H:i" }}</p>
+            </div>
+
+            <p class="warning-text">이 책 한 줄을 삭제하면 복구할 수 없습니다. 정말로 삭제하시겠습니까?</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-actions">
+                    <button type="submit" class="danger-button">삭제</button>
+                    <a class="secondary-button link-button" href="{% url 'quote_list' %}">취소</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

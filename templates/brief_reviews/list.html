@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>책 한 줄 목록 | 교내 독서 프로그램</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body>
+    <main class="page list-page">
+        <section class="content-wrap">
+            <div class="page-header">
+                <div>
+                    <h1>책 한 줄 목록</h1>
+                    <p class="sub-text">학생들이 함께 나누는 책 한 줄입니다.</p>
+                </div>
+                <div class="header-actions">
+                    <a class="secondary-button link-button compact-button" href="{% url 'home' %}">메인</a>
+                    {% if request.user.is_authenticated %}
+                        <a class="primary-button link-button compact-button" href="{% url 'quote_create' %}">작성</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="recommendation-grid">
+                {% for quote in quotes %}
+                    <div class="quote-card">
+                        <h2>{{ quote.book_title }}</h2>
+                        <p class="quote-text">{{ quote.post_text|linebreaks }}</p>
+                        <div class="quote-footer">
+                            <p class="meta-text">{{ quote.created_at|date:"Y.m.d H:i" }}</p>
+                            {% if request.user == quote.author or request.user.is_staff or request.user.is_superuser %}
+                                <div class="quote-actions">
+                                    <a class="secondary-button link-button compact-button" href="{% url 'quote_update' quote.id %}">수정</a>
+                                    <a class="danger-button link-button compact-button" href="{% url 'quote_delete' quote.id %}">삭제</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="empty-box">
+                        <p>아직 작성된 책 한 줄이 없습니다.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

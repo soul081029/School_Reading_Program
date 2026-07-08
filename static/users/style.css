@@ -534,3 +534,90 @@ textarea:focus {
         flex-direction: column;
     }
 }
+
+/* Quote Card Styles */
+.quote-card {
+    padding: 22px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(30, 55, 90, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quote-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(30, 55, 90, 0.14);
+}
+
+.quote-card h2 {
+    margin: 0 0 12px;
+    color: #163b73;
+    font-size: 20px;
+}
+
+.quote-text {
+    margin: 0 0 14px;
+    color: #26384f;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.quote-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.quote-footer .meta-text {
+    margin: 0;
+    font-size: 13px;
+}
+
+.quote-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.quote-preview {
+    padding: 20px;
+    margin-bottom: 22px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 4px solid #2563eb;
+}
+
+.quote-preview h2 {
+    margin: 0 0 12px;
+    color: #163b73;
+    font-size: 20px;
+}
+
+.quote-preview .quote-text {
+    margin-bottom: 12px;
+}
+
+.quote-preview .meta-text {
+    margin: 0;
+    font-size: 14px;
+}
+
+.warning-text {
+    margin-bottom: 22px;
+    padding: 12px 14px;
+    color: #9f1239;
+    background: #fff1f2;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.form-actions button,
+.form-actions .link-button {
+    flex: 1;
+}

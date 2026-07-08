@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import redirect, render
 
+from brief_reviews.models import BookQuote
 from recommendations.models import Recommendation
 
 from .forms import LoginForm, SignupForm
@@ -13,6 +14,7 @@ def home(request):
     """로그인한 학생에게 보여주는 메인 화면입니다."""
     search_query = request.GET.get('q', '').strip()
     recommendations = Recommendation.objects.select_related('author').order_by('-created_at')
+    quotes = BookQuote.objects.select_related('author').order_by('-created_at')[:5]
 
     if search_query:
         recommendations = recommendations.filter(
@@ -26,6 +28,7 @@ def home(request):
         'users/home.html',
         {
             'recommendations': recommendations,
+            'quotes': quotes,
             'search_query': search_query,
         },
     )
