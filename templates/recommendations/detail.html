@@ -31,6 +31,16 @@
 
             <div class="button-group">
                 <a class="secondary-button link-button" href="{% url 'recommendation_list' %}">목록</a>
+                <form method="post" action="{% url 'toggle_like' recommendation.id %}" class="like-form-detail">
+                    {% csrf_token %}
+                    <button type="submit" class="like-button-detail">
+                        {% if request.user in recommendation.liked_users.all %}
+                            ❤ {{ recommendation.like_count }}
+                        {% else %}
+                            🤍 {{ recommendation.like_count }}
+                        {% endif %}
+                    </button>
+                </form>
                 {% if request.user == recommendation.author or request.user.is_staff or request.user.is_superuser %}
                     <a class="primary-button link-button" href="{% url 'update_recommendation' recommendation.id %}">수정</a>
                     <a class="danger-button link-button" href="{% url 'delete_recommendation' recommendation.id %}">삭제</a>

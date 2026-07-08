@@ -134,3 +134,19 @@ def delete_recommendation(request, id):
         'recommendations/delete.html',
         {'recommendation': recommendation},
     )
+
+
+@login_required
+def toggle_like(request, id):
+    """좋아요를 토글합니다."""
+    recommendation = get_object_or_404(Recommendation, id=id)
+
+    if request.method == 'POST':
+        if request.user in recommendation.liked_users.all():
+            recommendation.liked_users.remove(request.user)
+        else:
+            recommendation.liked_users.add(request.user)
+
+        return redirect('recommendation_detail', id=recommendation.id)
+
+    return redirect('recommendation_detail', id=recommendation.id)

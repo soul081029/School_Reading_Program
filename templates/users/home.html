@@ -50,8 +50,22 @@
                             <p class="author-text">저자: {{ recommendation.book_author }}</p>
                             <p class="preview-text">{{ recommendation.post_text|truncatechars:100 }}</p>
                             <div class="card-footer">
-                                <p class="meta-text">작성일: {{ recommendation.created_at|date:"Y.m.d H:i" }}</p>
-                                <span class="primary-button link-button compact-button detail-button">자세히 보기</span>
+                                <div>
+                                    <p class="meta-text">작성일: {{ recommendation.created_at|date:"Y.m.d H:i" }}</p>
+                                </div>
+                                <div class="footer-actions">
+                                    <form method="post" action="{% url 'toggle_like' recommendation.id %}" class="like-form">
+                                        {% csrf_token %}
+                                        <button type="submit" class="like-button">
+                                            {% if request.user in recommendation.liked_users.all %}
+                                                ❤ {{ recommendation.like_count }}
+                                            {% else %}
+                                                🤍 {{ recommendation.like_count }}
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <span class="primary-button link-button compact-button detail-button">자세히 보기</span>
+                                </div>
                             </div>
                         </a>
                     {% empty %}

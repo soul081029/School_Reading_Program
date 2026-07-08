@@ -18,6 +18,12 @@ class Recommendation(models.Model):
     post_text = models.TextField(verbose_name='추천 이유')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='수정일')
+    liked_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name='liked_recommendations',
+        verbose_name='좋아요 사용자',
+    )
 
     class Meta:
         ordering = ['-created_at']
@@ -26,6 +32,11 @@ class Recommendation(models.Model):
 
     def __str__(self):
         return f'{self.book_title} - {self.writer_name}'
+
+    @property
+    def like_count(self):
+        """좋아요 개수를 반환합니다."""
+        return self.liked_users.count()
 
 
 class Comment(models.Model):

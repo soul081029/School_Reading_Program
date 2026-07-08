@@ -7,11 +7,17 @@ from .models import Comment, Recommendation
 class RecommendationAdmin(admin.ModelAdmin):
     """관리자 페이지에서 추천글을 관리합니다."""
 
-    list_display = ('writer_name', 'book_title', 'created_at', 'is_anonymous')
+    list_display = ('writer_name', 'book_title', 'created_at', 'is_anonymous', 'like_count')
     list_filter = ('is_anonymous', 'created_at')
     search_fields = ('book_title', 'book_author', 'writer_name')
     readonly_fields = ('created_at', 'updated_at')
     ordering = ('-created_at',)
+
+    def like_count(self, obj):
+        """좋아요 개수를 표시합니다."""
+        return obj.like_count
+
+    like_count.short_description = '좋아요'
 
 
 @admin.register(Comment)

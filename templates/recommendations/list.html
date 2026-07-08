@@ -25,12 +25,26 @@
 
             <div class="recommendation-grid">
                 {% for recommendation in recommendations %}
-                    <a class="recommendation-card" href="{% url 'recommendation_detail' recommendation.id %}">
-                        <p class="meta-text">{{ recommendation.writer_name }} · {{ recommendation.created_at|date:"Y.m.d H:i" }}</p>
-                        <h2>{{ recommendation.book_title }}</h2>
-                        <p class="author-text">저자: {{ recommendation.book_author }}</p>
-                        <p class="preview-text">{{ recommendation.post_text|truncatechars:100 }}</p>
-                    </a>
+                    <div class="recommendation-card-wrapper">
+                        <a class="recommendation-card" href="{% url 'recommendation_detail' recommendation.id %}">
+                            <p class="meta-text">{{ recommendation.writer_name }} · {{ recommendation.created_at|date:"Y.m.d H:i" }}</p>
+                            <h2>{{ recommendation.book_title }}</h2>
+                            <p class="author-text">저자: {{ recommendation.book_author }}</p>
+                            <p class="preview-text">{{ recommendation.post_text|truncatechars:100 }}</p>
+                        </a>
+                        <div class="recommendation-card-footer">
+                            <form method="post" action="{% url 'toggle_like' recommendation.id %}" class="like-form">
+                                {% csrf_token %}
+                                <button type="submit" class="like-button">
+                                    {% if request.user in recommendation.liked_users.all %}
+                                        ❤ {{ recommendation.like_count }}
+                                    {% else %}
+                                        🤍 {{ recommendation.like_count }}
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 {% empty %}
                     <div class="empty-box">
                         <p>아직 작성된 추천글이 없습니다.</p>
