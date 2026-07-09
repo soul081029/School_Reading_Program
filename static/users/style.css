@@ -881,6 +881,13 @@ textarea:focus {
 
     font-size: 13px;
     font-weight: 600;
+
+    transition: background-color .25s, color .25s;
+}
+
+.menu-center a:hover {
+    background: #EB8F26;
+    color: #FAF9F6;
 }
 
 /* -------------------- */
@@ -898,7 +905,7 @@ textarea:focus {
 
     border-radius: 50%;
 
-    background: #EB8F26;
+    background: #C9C9C9;
 
     display: block;
 

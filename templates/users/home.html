@@ -63,10 +63,10 @@
             
 
             <div class="main-section">
-                <div class="section-header">
+                {% comment %} <div class="section-header">
                     <h2>추천글 검색</h2>
                     <a class="primary-button link-button compact-button" href="{% url 'create_recommendation' %}">추천글 작성</a>
-                </div>
+                </div> {% endcomment %}
 
                 <form class="search-form" action="{% url 'home' %}" method="get">
                     <input
@@ -106,7 +106,7 @@
                                             {% endif %}
                                         </button>
                                     </form>
-                                    <span class="primary-button link-button compact-button detail-button">자세히 보기</span>
+                                    {% comment %} <span class="primary-button link-button compact-button detail-button">자세히 보기</span> {% endcomment %}
                                 </div>
                             </div>
                         </a>
@@ -120,8 +120,8 @@
 
             <div class="main-section">
                 <div class="section-header">
-                    <h2>책 한 줄 목록</h2>
-                    <a class="primary-button link-button compact-button" href="{% url 'quote_create' %}">책 한 줄 작성</a>
+                    <h2>책 글귀 목록</h2>
+                    {% comment %} <a class="primary-button link-button compact-button" href="{% url 'quote_create' %}">책 글귀 작성</a> {% endcomment %}
                 </div>
 
                 <div class="recommendation-grid">
@@ -131,12 +131,12 @@
                             <p class="quote-text">{{ quote.post_text|truncatechars:150 }}</p>
                             <div class="quote-footer">
                                 <p class="meta-text">{{ quote.created_at|date:"Y.m.d H:i" }}</p>
-                                <a class="secondary-button link-button compact-button" href="{% url 'quote_list' %}">더보기</a>
+                                {% comment %} <a class="secondary-button link-button compact-button" href="{% url 'quote_list' %}">더보기</a> {% endcomment %}
                             </div>
                         </div>
                     {% empty %}
                         <div class="empty-box">
-                            <p>아직 작성된 책 한 줄이 없습니다.</p>
+                            <p>아직 작성된 책 글귀가 없습니다.</p>
                         </div>
                     {% endfor %}
                 </div>
