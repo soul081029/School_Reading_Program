@@ -10,18 +10,57 @@
 <body>
     <main class="page list-page">
         <section class="content-wrap">
-            <div class="home-top-card">
-                <h1>교내 독서 프로그램</h1>
-                <p class="student-info">현재 로그인한 학번: <strong>{{ request.user.student_id }}</strong></p>
 
-                <div class="home-top-actions">
-                    <a class="primary-button link-button" href="{% url 'mypage' %}">마이페이지</a>
-                    <form action="{% url 'logout' %}" method="post" class="logout-form">
-                        {% csrf_token %}
-                        <button type="submit" class="text-button">로그아웃</button>
-                    </form>
+            <div class="main-menu">
+
+                <!-- 추천글 메뉴 -->
+                <div class="circle-menu">
+
+                    <div class="popup-menu">
+                        <a href="{% url 'create_recommendation' %}">
+                            추천글 작성
+                        </a>
+
+                        <a href="{% url 'recommendation_list' %}">
+                            추천글 목록
+                        </a>
+                    </div>
+
+                    <div class="circle-button"></div>
+
                 </div>
+
+
+                <!-- 마이페이지 -->
+                <div class="menu-center">
+                    <a href="{% url 'mypage' %}">
+                        마이페이지
+                    </a>
+                </div>
+
+
+                <!-- 책 글귀 메뉴 -->
+                <div class="circle-menu">
+
+                    <div class="popup-menu">
+                        <a href="{% url 'quote_create' %}">
+                            책 글귀 작성
+                        </a>
+
+                        <a href="{% url 'quote_list' %}">
+                            책 글귀 목록
+                        </a>
+                    </div>
+
+                    <div class="circle-button"></div>
+
+                </div>
+
             </div>
+
+
+            <!-- 기존 추천글 검색 / 목록 / 책 글귀 목록 부분은 그대로 유지 -->
+            
 
             <div class="main-section">
                 <div class="section-header">
