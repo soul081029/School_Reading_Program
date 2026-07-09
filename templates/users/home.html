@@ -87,13 +87,13 @@
                 <div class="recommendation-grid">
                     {% for recommendation in recommendations %}
                         <a class="recommendation-card" href="{% url 'recommendation_detail' recommendation.id %}">
-                            <p class="meta-text">작성자: {{ recommendation.writer_name }}</p>
+                            <p class="meta-text"> {{ recommendation.writer_name }}</p>
                             <h2>{{ recommendation.book_title }}</h2>
-                            <p class="author-text">저자: {{ recommendation.book_author }}</p>
+                            <p class="author-text"> {{ recommendation.book_author }}</p>
                             <p class="preview-text">{{ recommendation.post_text|truncatechars:100 }}</p>
                             <div class="card-footer">
                                 <div>
-                                    <p class="meta-text">작성일: {{ recommendation.created_at|date:"Y.m.d H:i" }}</p>
+                                    <p class="meta-text"> {{ recommendation.created_at|date:"Y.m.d H:i" }}</p>
                                 </div>
                                 <div class="footer-actions">
                                     <form method="post" action="{% url 'toggle_like' recommendation.id %}" class="like-form">

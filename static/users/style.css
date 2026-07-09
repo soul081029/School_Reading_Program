@@ -241,7 +241,7 @@ textarea:focus {
 .author-text,
 .preview-text {
     margin: 0;
-    color: #53657a;
+    color: #737373;
 }
 
 .header-actions {
@@ -264,7 +264,7 @@ textarea:focus {
     display: block;
     padding: 22px;
     color: inherit;
-    background: #fff;
+    background: #FFFCF3;
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(30, 55, 90, 0.1);
     text-decoration: none;
@@ -281,7 +281,7 @@ textarea:focus {
 
 .recommendation-card h2 {
     margin: 8px 0;
-    color: #163b73;
+    color: #EB8F26;
     font-size: 22px;
 }
 
