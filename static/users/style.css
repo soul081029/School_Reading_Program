@@ -851,11 +851,18 @@ textarea:focus {
     display: flex;
     align-items: flex-end;
     gap: 55px;
+
+    z-index: 99999;
 }
 
 /* -------------------- */
 /* 마이페이지 */
 /* -------------------- */
+
+.menu-center {
+    position: relative;
+    z-index: 99999;
+}
 
 .menu-center a {
     display: flex;
@@ -882,6 +889,7 @@ textarea:focus {
 
 .circle-menu {
     position: relative;
+    z-index: 99999;
 }
 
 .circle-button {
@@ -921,6 +929,8 @@ textarea:focus {
     visibility: hidden;
 
     transition: .25s;
+
+    z-index: 100000;
 }
 
 .circle-menu:hover .popup-menu {
